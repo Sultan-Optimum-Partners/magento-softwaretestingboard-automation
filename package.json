@@ -4,7 +4,7 @@
     "@types/node": "^22.10.2"
   },
   "scripts": {
-    "test:e2e": "npx playwright test tests/test-scenario7.spec.ts --project=chromium",
+    "test:e2e": "npx playwright test tests/test.spec.ts --project=chromium",
     "test:e2e:all": "npx playwright test tests --project=all-browsers-and-tests",
     "test:e2e:dev": "npx playwright test tests/ --project=chromium --headed --retries=0 --reporter=line",
     "test:e2e:smoke": "npx playwright test tests/ --grep @smoke --project=chromium",
@@ -14,5 +14,4 @@
   "dependencies": {
     "dotenv": "^16.4.7"
   }
-
 }

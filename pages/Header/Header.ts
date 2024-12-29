@@ -9,11 +9,19 @@ export default class Header{
         this.page = page;
     }
 
-    public async navigateToSignIn(): Promise<void>{
+    async navigateToSignIn(): Promise<void>{
         await this.page.locator(locators.signInButton).click();
+        await this.page.waitForLoadState("domcontentloaded");
     }
 
-    public async navigateToCreateAnAccount(): Promise<void>{
+    async navigateToCreateAnAccount(): Promise<void>{
         await this.page.locator(locators.createAccountbutton).click();
     }
+
+    async navigateToMyAccount(): Promise<void> {
+        await this.page.locator(locators.profileDropDownButton).click();
+        await this.page.locator(locators.myAccountButton).click();
+        await this.page.waitForLoadState("domcontentloaded");
+    } 
+
 }

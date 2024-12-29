@@ -1,19 +1,11 @@
-import { test, expect } from "@playwright/test";
-import HomePage from "../pages/Home/HomePage";
+import { test, expect } from "../fixtures/shared.fixture";
+import HomePage from "../pages/HomePage/HomePage";
 
-test.describe("Test Scenario 1", () => {
 
-    let homePage: HomePage;
 
-    test.beforeEach(async({ page }) => {
-        homePage = new HomePage(page);
-        await homePage.goToWebsite()
-    })
-
-    test("User is able to navigate to homepage and view products without authentication", async ({ page }) => {
+    test("User is able to navigate to homepage and view products without authentication", async ({ page, homePage }) => {
         const isLoggedIn = await homePage.isLoggedIn();
         const isProductsVisible = await homePage.isProductsVisible();
         expect(isLoggedIn).toBeFalsy();
         expect(isProductsVisible).toBeTruthy();
     })
-});

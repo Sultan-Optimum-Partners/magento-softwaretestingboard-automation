@@ -1,29 +1,29 @@
-import { test, expect } from "@playwright/test";
-import HomePage from "../pages/Home/HomePage";
+import { test, expect } from "../fixtures/shared.fixture";
+import HomePage from "../pages/HomePage/HomePage";
 
-test.describe("Test Scenario 6", () => {
 
-    let homePage: HomePage;
+    test("User can add a product to Cart", async ({ page, homePage, productPage }) => {
+        await homePage.navigateToRandomProduct();
+        // const randomProduct = await homePage.getRandomProduct();
+        // await randomProduct.scrollIntoViewIfNeeded();
+        // const randomProductLink = randomProduct.locator('.product-item-details .product-item-name a');
+        // await randomProductLink.click();
 
-    test.beforeEach(async ({ page }) => {
-        homePage = new HomePage(page);
-        await homePage.goToWebsite();
-    });
-
-    test("User can add a product to Cart", async ({ page }) => {
-        const randomProduct = await homePage.getRandomProduct();
-        await randomProduct.scrollIntoViewIfNeeded();
-        const randomProductLink = randomProduct.locator('.product-item-details .product-item-name a');
-        await randomProductLink.click();
-        const pageTitle = await page.locator("span[data-ui-id='page-title-wrapper']").textContent();
         
-        const options = await page.locator("#product-options-wrapper .swatch-attribute div:first-child").all();
+        const pageTitle = await productPage.getProductName();;
+        // const pageTitle = await page.locator("span[data-ui-id='page-title-wrapper']").textContent();
 
-        for(let option of options){
-            await option.click();
-        }        
+        await productPage.selectSizeAndColorIfExist();
+        
+        // const options = await page.locator("#product-options-wrapper .swatch-attribute div:first-child").all();
 
-        await page.getByRole('button', { name: 'Add to Cart' }).click();
+        // for(let option of options){
+        //     await option.click();
+        // }        
+
+        await productPage.addToCartButton();
+
+        // await page.getByRole('button', { name: 'Add to Cart' }).click();
 
         const successMessageLocator = page.locator("div[data-ui-id='message-success']");
         const errorMessageLocator = page.locator("div[data-ui-id='message-error']");
@@ -37,5 +37,3 @@ test.describe("Test Scenario 6", () => {
         }
 
     });
-
-});

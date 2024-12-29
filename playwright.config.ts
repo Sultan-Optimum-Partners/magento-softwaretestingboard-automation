@@ -8,7 +8,7 @@ dotenv.config({
 export default defineConfig({
   fullyParallel: true,
   retries: 0,
-  workers: undefined,
+  workers: 1,
   reporter: 'html',
   use: {
     headless: false,
@@ -20,6 +20,7 @@ export default defineConfig({
       name: 'chromium',
       use: { 
         ...devices['Desktop Chrome'],
+
       },
       
     },
