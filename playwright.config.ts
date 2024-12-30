@@ -13,7 +13,7 @@ export default defineConfig({
   use: {
     headless: true,
     trace: 'on-first-retry',
-    baseURL: process.env.BASE_URL, // Global baseURL for all projects
+    baseURL: "https://magento.softwaretestingboard.com/", // Global baseURL for all projects
 
   },
 
@@ -33,21 +33,21 @@ export default defineConfig({
     {
       name: 'all-browsers-and-tests',
       use: { 
-        baseURL: process.env.BASE_URL,
+        baseURL: "https://magento.softwaretestingboard.com/",
          ...devices['Desktop Chrome']
       },
     },
     {
       name: 'all-browsers-and-tests',
       use: { 
-        baseURL: process.env.BASE_URL,
+        baseURL: "https://magento.softwaretestingboard.com/",
          ...devices['Desktop Firefox']
       },
     },
     {
       name: 'local',
       use: { 
-        baseURL: process.env.BASE_URL,
+        baseURL: "https://magento.softwaretestingboard.com/",
       },
     },
 
