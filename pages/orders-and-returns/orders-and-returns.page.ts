@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { locators } from "./OrdersAndReturnPageLocators";
+import { locators } from "./orders-and-returns.locators";
 
 export default class OrdersAndReturnsPage {
 

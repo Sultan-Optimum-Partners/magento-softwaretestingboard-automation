@@ -1,6 +1,6 @@
 import { expect, Page } from "@playwright/test";
-import BasePage from "../BasePage";
-import { locators } from "./CartLocators";
+import BasePage from "../../pages/base.page";
+import { locators } from "./cart.locators";
 
 export default class Cart {
 

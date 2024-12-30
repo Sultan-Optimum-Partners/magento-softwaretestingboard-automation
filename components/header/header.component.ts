@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test";
-import { locators } from "./HeaderLocators";
+import { locators } from "./header.locators";
 
 export default class Header{
 

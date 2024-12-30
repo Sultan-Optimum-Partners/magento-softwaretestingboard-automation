@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test";
-import BasePage from "../BasePage";
-import { locators } from "./ShippingPageLocators";
+import BasePage from "../base.page";
+import { locators } from "./shipping.locators";
 
 export default class ShippingPage extends BasePage {
     constructor(page: Page) {

@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test";
-import { locators } from "./SignInPageLocators";
-import BasePage from "../BasePage";
+import { locators } from "./signin.locators";
+import BasePage from "../base.page";
 
 export default class SignInPage extends BasePage{
 

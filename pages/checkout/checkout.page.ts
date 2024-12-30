@@ -1,7 +1,7 @@
 import { Page } from "@playwright/test";
-import BasePage from "../BasePage";
-import { locators } from "./CheckoutPageLocators";
-import HomePage from "../HomePage/HomePage";
+import BasePage from "../base.page";
+import { locators } from "./checkout.locators";
+import HomePage from "../home/home.page";
 
 export default class extends BasePage{
 

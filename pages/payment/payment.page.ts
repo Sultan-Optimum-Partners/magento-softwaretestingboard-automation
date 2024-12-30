@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test";
-import BasePage from "../BasePage";
-import { locators } from "./PaymentPageLocator";
+import BasePage from "../base.page";
+import { locators } from "./payment.locators";
 
 export default class PaymentPage {
     page: Page;

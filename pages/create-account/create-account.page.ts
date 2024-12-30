@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
-import { locators } from "./CreateAccountPageLocators";
-import BasePage from "../BasePage";
+import { locators } from "./create-account.locators";
+import BasePage from "../base.page";
 
 export default class CreateAccountPage extends BasePage{
     constructor(page: Page){

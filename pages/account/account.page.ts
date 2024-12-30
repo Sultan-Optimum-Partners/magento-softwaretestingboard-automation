@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import { locators } from "./AccountPageLocators";
+import { locators } from "./account.locators";
 
 export default class AccountPage {
 

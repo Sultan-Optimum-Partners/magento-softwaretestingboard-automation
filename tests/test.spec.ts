@@ -24,9 +24,9 @@ test("User can search on a specific product", async ({ page, homePage }) => {
     await homePage.searchSpecificProduct("bag");
 });
 
-test("Verify all search result should contain the search term", async ({ page, homePage, searchResult }) => {
+test("Verify all search result should contain the search term", async ({ page, homePage, searchResultPage }) => {
     await homePage.searchSpecificProduct("backpack");
-    await searchResult.verifyAllSearchResultContains("backpack")
+    await searchResultPage.verifyAllSearchResultContains("backpack")
 });
 
 test("Can navigate to a product page, verify that the correct page is opened", async ({ page, homePage, productPage }) => {

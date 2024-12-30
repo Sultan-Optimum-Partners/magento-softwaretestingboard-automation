@@ -1,6 +1,6 @@
 import { expect, Page } from "@playwright/test";
-import BasePage from "../BasePage";
-import { locators } from "./SearchResultPageLocators";
+import BasePage from "../base.page";
+import { locators } from "./search-result.locators";
 
 export default class SearchResultPage extends BasePage {
 

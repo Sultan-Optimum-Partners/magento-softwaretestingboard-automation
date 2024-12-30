@@ -1,30 +1,30 @@
 import { test as base } from "@playwright/test";
-import AccountPage from "../pages/AccountPage/AccountPage";
-import Cart from "../pages/Cart/Cart";
-import CheckoutPage from "../pages/CheckoutPage/CheckoutPage";
-import CreateAccount from "../pages/CreateAccountPage/CreateAccountPage";
-import Header from "../pages/Header/Header";
-import OrdersAndReturnsPage from "../pages/OrdersAndReturnsPage/OrdersAndReturnsPage";
-import PaymentPage from "../pages/PaymentPage/PaymentPage";
-import ProductPage from "../pages/ProductPage/ProductPage";
-import SearchResult from "../pages/SearchResultPage/SearchResultPage";
-import ShippingPage from "../pages/ShippingPage/ShippingPage";
-import SignIn from "../pages/SignInPage/SignInPage";
-import HomePage from "../pages/HomePage/HomePage";
+import AccountPage from "../pages/account/account.page";
+import Cart from "../components/cart/cart.component";
+import CheckoutPage from "../pages/checkout/checkout.page";
+import CreateAccountPage from "../pages/create-account/create-account.page";
+import Header from "../components/header/header.component";
+import OrdersAndReturnsPage from "../pages/orders-and-returns/orders-and-returns.page";
+import PaymentPage from "../pages/payment/payment.page";
+import ProductPage from "../pages/product/product.page";
+import SearchResultPage from "../pages/search-result/search-result.page";
+import ShippingPage from "../pages/shipping/shipping.page";
+import SignInPage from "../pages/signin/signin.page";
+import HomePage from "../pages/home/home.page";
 
 type testFixtures = {
     accountPage: AccountPage,
     cart: Cart,
     checkoutPage: CheckoutPage,
-    createAccount: CreateAccount,
+    createAccountPage: CreateAccountPage,
     header: Header,
     homePage: HomePage,
     ordersAndReturnsPage: OrdersAndReturnsPage,
     paymentPage: PaymentPage,
     productPage: ProductPage,
-    searchResult: SearchResult,
+    searchResultPage: SearchResultPage,
     shippingPage: ShippingPage,
-    signInPage: SignIn, 
+    signInPage: SignInPage, 
  };
 
 export const test = base.extend<testFixtures>({
@@ -46,8 +46,8 @@ export const test = base.extend<testFixtures>({
         const checkoutPage = new CheckoutPage(page);
         await use(checkoutPage);
     },
-    createAccount: async({page}, use) => {
-        const createAccount = new CreateAccount(page);
+    createAccountPage: async({page}, use) => {
+        const createAccount = new CreateAccountPage(page);
         await use(createAccount);
     },
     header: async({page}, use) => {
@@ -70,8 +70,8 @@ export const test = base.extend<testFixtures>({
         const productPage = new ProductPage(page);
         await use(productPage);
     },
-    searchResult: async({page}, use) => {
-        const searchResult = new SearchResult(page);
+    searchResultPage: async({page}, use) => {
+        const searchResult = new SearchResultPage(page);
         await use(searchResult);
     },
     shippingPage: async({page}, use) => {
@@ -79,7 +79,7 @@ export const test = base.extend<testFixtures>({
         await use(shippingPage);
     },
     signInPage: async({page}, use) => {
-        const signIn = new SignIn(page);
+        const signIn = new SignInPage(page);
         await use(signIn);
     },
 });
