@@ -8,16 +8,9 @@ test("User is able to navigate to homepage and view products without authenticat
 })
 
 test("User is able to sign in successfully", async ({ page, header, signInPage }) => {
-    // (SignUp)
-    // await header.navigateToCreateAnAccount();
-    // await createAccountPage.fillPersonalInformation("Sultan", "Duwaik");
-    // await createAccountPage.fillSignInInformation("sultan.raed88@gmail.com", "Pass@123", "Pass@123");
-    // await createAccountPage.clickCreateAnAccount();
-    // (End Signup)
     await header.navigateToSignIn();
     await signInPage.validSignIn("sultan.raed88@gmail.com", "Pass@123");
-    const isLoggedIn = await signInPage.isLoggedIn();
-    expect(isLoggedIn).toBeTruthy();
+    expect(await signInPage.isLoggedIn()).toBeTruthy();
 });
 
 test("User can search on a specific product", async ({ page, homePage }) => {
@@ -25,8 +18,8 @@ test("User can search on a specific product", async ({ page, homePage }) => {
 });
 
 test("Verify all search result should contain the search term", async ({ page, homePage, searchResultPage }) => {
-    await homePage.searchSpecificProduct("backpack");
-    await searchResultPage.verifyAllSearchResultContains("backpack")
+    await homePage.searchSpecificProduct("bag");
+    await searchResultPage.verifyAllSearchResultContains("bag")
 });
 
 test("Can navigate to a product page, verify that the correct page is opened", async ({ page, homePage, productPage }) => {
@@ -38,18 +31,19 @@ test("Can navigate to a product page, verify that the correct page is opened", a
 /*
     - User can add a product to Cart, 
     - Verify that the product is added to the cart, 
+    - add another product.
     - Finish checkout and place order,
-    - Verify that the order is visible in orders history page with order number and price “sales/order/history/
+    - Verify that the order is visible in orders history page with order number and price “sales/order/history/”
 */
 
-test("product can be added to cart, checkout and place order, verify that the order is visible in orders history page", 
+test.only("product can be added to cart, checkout and place order, verify that the order is visible in orders history page", 
     async ({  page, homePage, productPage, cart, shippingPage, paymentPage, checkoutPage, header, signInPage, accountPage }) => {
 
     await header.navigateToSignIn();
     await signInPage.validSignIn("sultan.raed88@gmail.com", "Pass@123");
+    await signInPage.navigateToHome();
     expect(await signInPage.isLoggedIn()).toBeTruthy();
 
-    await signInPage.navigateToHome();
 
     await homePage.navigateToRandomProduct();
     let pageTitle = await productPage.getProductName();
@@ -62,28 +56,28 @@ test("product can be added to cart, checkout and place order, verify that the or
 
     expect(displayedMessage?.trim()).toContain(`You added ${pageTitle} to your shopping cart.`);
 
-    // await productPage.openCart();
+    await productPage.openCart();
 
-    // let cartItemsNames = await cart.getCartItemNames();
-    // expect(cartItemsNames).toContain(pageTitle?.trim());
+    let cartItemsNames = await cart.getCartItemNames();
+    expect(cartItemsNames).toContain(pageTitle?.trim());
 
-    // await page.goBack({waitUntil: "domcontentloaded"});
+    await page.goBack({waitUntil: "domcontentloaded"});
     
-    // await homePage.navigateToRandomProduct();
-    // pageTitle = await productPage.getProductName();
+    await homePage.navigateToRandomProduct();
+    pageTitle = await productPage.getProductName();
     
-    // await productPage.selectSizeAndColorIfExist();
+    await productPage.selectSizeAndColorIfExist();
     
-    // await productPage.addToCartButton();
+    await productPage.addToCartButton();
 
-    // displayedMessage = await productPage.getDisplayedMessageTextContent();
+    displayedMessage = await productPage.getDisplayedMessageTextContent();
 
-    // expect(displayedMessage?.trim()).toContain(`You added ${pageTitle} to your shopping cart.`);
+    expect(displayedMessage?.trim()).toContain(`You added ${pageTitle} to your shopping cart.`);
    
     await productPage.openCart();
 
-    // cartItemsNames = await cart.getCartItemNames();
-    // expect(cartItemsNames).toContain(pageTitle?.trim());
+    cartItemsNames = await cart.getCartItemNames();
+    expect(cartItemsNames).toContain(pageTitle?.trim());
 
     await cart.checkout();
 

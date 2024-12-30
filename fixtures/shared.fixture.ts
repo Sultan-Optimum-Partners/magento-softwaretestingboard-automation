@@ -31,7 +31,7 @@ export const test = base.extend<testFixtures>({
     page: async({browser}, use) => {
         const context = await browser.newContext();
         const page = await context.newPage();
-        await page.goto("https://magento.softwaretestingboard.com/", { waitUntil: "domcontentloaded" });
+        await page.goto(process.env.BASE_URL!, { waitUntil: "domcontentloaded" });
         await use(page);
         },
     accountPage: async({page}, use) => {

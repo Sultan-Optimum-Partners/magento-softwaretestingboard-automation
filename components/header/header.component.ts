@@ -16,6 +16,7 @@ export default class Header{
 
     async navigateToCreateAnAccount(): Promise<void>{
         await this.page.locator(locators.createAccountbutton).click();
+        await this.page.waitForLoadState("domcontentloaded");
     }
 
     async navigateToMyAccount(): Promise<void> {

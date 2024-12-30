@@ -8,6 +8,7 @@ export default class BasePage {
     }
     
     async isLoggedIn(): Promise<boolean>{
+        await this.page.waitForSelector(".panel .logged-in");
         return this.page.locator(".panel .logged-in").isVisible();
     } 
 
@@ -17,5 +18,6 @@ export default class BasePage {
 
     async navigateToHome(): Promise<void> {
         await this.page.locator(".header> .logo").click();
+        await this.page.waitForLoadState("load");
     }
 }

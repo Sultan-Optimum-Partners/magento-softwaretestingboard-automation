@@ -17,7 +17,7 @@ export default class HomePage extends BasePage {
         await this.page.locator(locators.searchField).fill(searchTerm);
         await this.page.locator(locators.searchButton).click();
         await this.page.waitForLoadState("domcontentloaded");
-        expect(this.page.url()).toBe("https://magento.softwaretestingboard.com/catalogsearch/result/?q=" + searchTerm);
+        expect(this.page.url()).toBe(process.env.BASE_URL! + "catalogsearch/result/?q=" + searchTerm);
     }
 
     async getRandomProduct(): Promise<Locator> {

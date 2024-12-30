@@ -6,12 +6,12 @@ dotenv.config({
 });
 
 export default defineConfig({
-  fullyParallel: true,
+  fullyParallel: false,
   retries: 0,
   workers: 1,
   reporter: 'html',
   use: {
-    headless: true,
+    headless: false,
     trace: 'on-first-retry',
   },
 

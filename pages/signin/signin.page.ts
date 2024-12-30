@@ -8,14 +8,11 @@ export default class SignInPage extends BasePage{
         super(page)
     }
 
-    async validSignIn(email: string, password: string){
+    async validSignIn(email: string, password: string): Promise<void>{
         await this.page.locator(locators.email).fill(email);
         await this.page.locator(locators.password).fill(password);
         const signinButton = this.page.locator(locators.signInButton);
-        await signinButton.scrollIntoViewIfNeeded();
-        await signinButton.click({ timeout: 5000 }); // Increase the timeout to 5000ms
-
-        await this.page.waitForTimeout(2000)
+        await signinButton.click();
     }
     
 }
