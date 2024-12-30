@@ -8,10 +8,12 @@ test("User is able to navigate to homepage and view products without authenticat
 })
 
 test("User is able to sign in successfully", async ({ page, header, signInPage }) => {
+    // (SignUp)
     // await header.navigateToCreateAnAccount();
     // await createAccountPage.fillPersonalInformation("Sultan", "Duwaik");
     // await createAccountPage.fillSignInInformation("sultan.raed88@gmail.com", "Pass@123", "Pass@123");
     // await createAccountPage.clickCreateAnAccount();
+    // (End Signup)
     await header.navigateToSignIn();
     await signInPage.validSignIn("sultan.raed88@gmail.com", "Pass@123");
     const isLoggedIn = await signInPage.isLoggedIn();
@@ -22,7 +24,7 @@ test("User can search on a specific product", async ({ page, homePage }) => {
     await homePage.searchSpecificProduct("bag");
 });
 
-test("Verify all search result should contain the search term - (search for “backpack”)", async ({ page, homePage, searchResult }) => {
+test("Verify all search result should contain the search term", async ({ page, homePage, searchResult }) => {
     await homePage.searchSpecificProduct("backpack");
     await searchResult.verifyAllSearchResultContains("backpack")
 });
@@ -31,34 +33,23 @@ test("Can navigate to a product page, verify that the correct page is opened", a
     const productName = await homePage.navigateToRandomProduct();
     const pageTitle = await productPage.getProductName();
     expect(productName).toEqual(pageTitle);
-
 });
 
-test("Verify that the product is added to the cart “checkout/cart/” — assert for product name", 
-    async ({ 
-        page,
-        homePage,
-        productPage,
-        cart,
-        shippingPage,
-        paymentPage,
-        checkoutPage,
-        header,
-        signInPage,
-        accountPage,
-     }) => {
+/*
+    - User can add a product to Cart, 
+    - Verify that the product is added to the cart, 
+    - Finish checkout and place order,
+    - Verify that the order is visible in orders history page with order number and price “sales/order/history/
+*/
 
+test("product can be added to cart, checkout and place order, verify that the order is visible in orders history page", 
+    async ({  page, homePage, productPage, cart, shippingPage, paymentPage, checkoutPage, header, signInPage, accountPage }) => {
 
-    // sign in
     await header.navigateToSignIn();
     await signInPage.validSignIn("sultan.raed88@gmail.com", "Pass@123");
     expect(await signInPage.isLoggedIn()).toBeTruthy();
-    // end sign in
 
-
-    // get back to Home
     await signInPage.navigateToHome();
-    // end get back to Home
 
     await homePage.navigateToRandomProduct();
     let pageTitle = await productPage.getProductName();
@@ -90,6 +81,7 @@ test("Verify that the product is added to the cart “checkout/cart/” — asse
     // expect(displayedMessage?.trim()).toContain(`You added ${pageTitle} to your shopping cart.`);
    
     await productPage.openCart();
+
     // cartItemsNames = await cart.getCartItemNames();
     // expect(cartItemsNames).toContain(pageTitle?.trim());
 
@@ -125,13 +117,7 @@ test("Verify that the product is added to the cart “checkout/cart/” — asse
 
 });
 
-test("Can empty the cart", 
-    async ({ 
-        page,
-        homePage,
-        productPage,
-        cart
-    }) => {
+test("Can empty the cart", async ({  page, homePage, productPage, cart }) => {
     
     await homePage.navigateToRandomProduct();
     
@@ -143,19 +129,7 @@ test("Can empty the cart",
 
     let displayedMessage = await productPage.getDisplayedMessageTextContent();
 
-
     expect(displayedMessage?.trim()).toContain(`You added ${pageTitle} to your shopping cart.`);
-
-
-    // add another product
-
-    // await page.goBack();
-
-    // await homePage.navigateToRandomProduct();
-    
-    // await productPage.selectSizeAndColorIfExist();
-    
-    // await productPage.addToCartButton();
 
     await productPage.openCart();
 
