@@ -1,23 +1,28 @@
 import { expect, Locator, Page } from "@playwright/test";
-import BasePage from "../base.page";
-import { locators } from "./home.locators";
+import BasePage from "./base.page";
 
 export default class HomePage extends BasePage {
+
+    readonly locators = {
+        productsDiv: ".block-products-list",
+        searchField: "#search_mini_form #search",
+        searchButton: "#search_mini_form button[type='submit']",
+    }
 
     constructor(page: Page){
         super(page)
     }
 
     async isProductsVisible(): Promise<boolean>{
-        await this.page.locator(locators.productsDiv).scrollIntoViewIfNeeded();
-        return await this.page.locator(locators.productsDiv).isVisible();
+        await this.page.locator(this.locators.productsDiv).scrollIntoViewIfNeeded();
+        return await this.page.locator(this.locators.productsDiv).isVisible();
     }
 
     async searchSpecificProduct(searchTerm: string){
-        await this.page.locator(locators.searchField).fill(searchTerm);
-        await this.page.locator(locators.searchButton).click();
+        await this.page.locator(this.locators.searchField).fill(searchTerm);
+        await this.page.locator(this.locators.searchButton).click();
         await this.page.waitForLoadState("domcontentloaded");
-        expect(this.page.url()).toBe(process.env.BASE_URL! + "catalogsearch/result/?q=" + searchTerm);
+        expect(this.page.url()).toContain(`/catalogsearch/result/?q=${searchTerm}`);
     }
 
     async getRandomProduct(): Promise<Locator> {
@@ -38,12 +43,6 @@ export default class HomePage extends BasePage {
         await this.page.waitForLoadState("domcontentloaded");
 
         return productName!.trim();
-    }
-
-    async navigateToOrderAndReturnsPage(): Promise<void>{
-        await this.page.locator(locators.OrderAndReturnsButton).click();
-        await this.page.waitForNavigation({ waitUntil: "domcontentloaded" });
-
     }
 
 }

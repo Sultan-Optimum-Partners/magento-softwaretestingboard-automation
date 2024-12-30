@@ -1,8 +1,11 @@
 import { expect, Page } from "@playwright/test";
-import BasePage from "../base.page";
-import { locators } from "./search-result.locators";
+import BasePage from "./base.page";
 
 export default class SearchResultPage extends BasePage {
+
+    readonly locators = {
+        productsTitleLinks: ".product-item .product-item-link",
+    }
 
     constructor(page: Page){
         super(page)
@@ -10,7 +13,7 @@ export default class SearchResultPage extends BasePage {
 
     async verifyAllSearchResultContains(searchTerm: string) {
 
-        const productsLink = await this.page.locator(".product-item .product-item-link").all();
+        const productsLink = await this.page.locator(this.locators.productsTitleLinks).all();
         
         for (let productLink of productsLink) {
 

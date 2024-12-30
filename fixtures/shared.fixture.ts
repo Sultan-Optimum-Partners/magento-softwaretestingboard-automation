@@ -1,16 +1,16 @@
 import { test as base } from "@playwright/test";
-import AccountPage from "../pages/account/account.page";
-import Cart from "../components/cart/cart.component";
-import CheckoutPage from "../pages/checkout/checkout.page";
-import CreateAccountPage from "../pages/create-account/create-account.page";
-import Header from "../components/header/header.component";
-import OrdersAndReturnsPage from "../pages/orders-and-returns/orders-and-returns.page";
-import PaymentPage from "../pages/payment/payment.page";
-import ProductPage from "../pages/product/product.page";
-import SearchResultPage from "../pages/search-result/search-result.page";
-import ShippingPage from "../pages/shipping/shipping.page";
-import SignInPage from "../pages/signin/signin.page";
-import HomePage from "../pages/home/home.page";
+import AccountPage from "../pages/account.page";
+import Cart from "../pages/cart.component";
+import CheckoutPage from "../pages/checkout.page";
+import CreateAccountPage from "../pages/create-account.page";
+import Header from "../pages/header.component";
+import HomePage from "../pages/home.page";
+import OrdersAndReturnsPage from "../pages/orders-and-returns.page";
+import PaymentPage from "../pages/payment.page";
+import ProductPage from "../pages/product.page";
+import SearchResultPage from "../pages/search-result.page";
+import ShippingPage from "../pages/shipping.page";
+import SignInPage from "../pages/signin.page";
 
 type testFixtures = {
     accountPage: AccountPage,
@@ -28,12 +28,10 @@ type testFixtures = {
  };
 
 export const test = base.extend<testFixtures>({
-    page: async({browser}, use) => {
-        const context = await browser.newContext();
-        const page = await context.newPage();
-        await page.goto(process.env.BASE_URL!, { waitUntil: "domcontentloaded" });
+    page: async({page}, use) => {
+        await page.goto("/", { waitUntil: "domcontentloaded" });
         await use(page);
-        },
+    },
     accountPage: async({page}, use) => {
         const accountPage = new AccountPage(page);
         await use(accountPage);

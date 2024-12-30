@@ -1,15 +1,14 @@
 import { test, expect } from "../fixtures/shared.fixture";
 
 test("User is able to navigate to homepage and view products without authentication", async ({ page, homePage }) => {
-    const isLoggedIn = await homePage.isLoggedIn();
-    const isProductsVisible = await homePage.isProductsVisible();
-    expect(isLoggedIn).toBeFalsy();
-    expect(isProductsVisible).toBeTruthy();
+    expect(await homePage.isLoggedIn()).toBeFalsy();
+    expect(await homePage.isProductsVisible()).toBeTruthy();
 })
 
 test("User is able to sign in successfully", async ({ page, header, signInPage }) => {
     await header.navigateToSignIn();
     await signInPage.validSignIn("sultan.raed88@gmail.com", "Pass@123");
+    // await page.waitForNavigation({ waitUntil: "load" });
     expect(await signInPage.isLoggedIn()).toBeTruthy();
 });
 
@@ -36,8 +35,8 @@ test("Can navigate to a product page, verify that the correct page is opened", a
     - Verify that the order is visible in orders history page with order number and price “sales/order/history/”
 */
 
-test.only("product can be added to cart, checkout and place order, verify that the order is visible in orders history page", 
-    async ({  page, homePage, productPage, cart, shippingPage, paymentPage, checkoutPage, header, signInPage, accountPage }) => {
+test("product can be added to cart, checkout and place order, verify that the order is visible in orders history page", 
+    async ({ page, homePage, productPage, cart, shippingPage, paymentPage, checkoutPage, header, signInPage, accountPage }) => {
 
     await header.navigateToSignIn();
     await signInPage.validSignIn("sultan.raed88@gmail.com", "Pass@123");

@@ -11,8 +11,10 @@ export default defineConfig({
   workers: 1,
   reporter: 'html',
   use: {
-    headless: false,
+    headless: true,
     trace: 'on-first-retry',
+    baseURL: process.env.BASE_URL, // Global baseURL for all projects
+
   },
 
   projects: [

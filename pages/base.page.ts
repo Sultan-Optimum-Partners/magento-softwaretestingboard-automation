@@ -8,7 +8,8 @@ export default class BasePage {
     }
     
     async isLoggedIn(): Promise<boolean>{
-        await this.page.waitForSelector(".panel .logged-in");
+        // await this.page.waitForLoadState("domcontentloaded");
+        await this.page.waitForSelector(".panel>ul.header", {state: "visible"});
         return this.page.locator(".panel .logged-in").isVisible();
     } 
 
